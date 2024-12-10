@@ -11,21 +11,21 @@ public class VoiceRecognition : MonoBehaviour
     private KeywordRecognizer keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
-    [SerializeField]
-    private Transform testCube;
+    DialogueManager dialogueManager;
 
     private void Start()
     {
-        actions.Add("vorne", forward);
-        actions.Add("oben", up);
-        actions.Add("unten", down);
-        actions.Add("zurück", back);
-        actions.Add("links", left);
-        actions.Add("rechts", right);
+        actions.Add("Hallo", hello);
+        actions.Add("Coding", coding); 
+        actions.Add("Stop", interrupt);
+
+
 
         keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += speechDistributer;
         keywordRecognizer.Start(); //nur Starten und stoppen bei Gebrauch um Laufzeit zu verbessern
+
+        dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
     private void speechDistributer(PhraseRecognizedEventArgs speech)
@@ -34,32 +34,41 @@ public class VoiceRecognition : MonoBehaviour
         actions[speech.text].Invoke();
     }
 
-    private void forward()
+
+    private void hello()
     {
-        testCube.Translate(1, 0, 0);
+        if (testForDialogueManager())
+        {
+            dialogueManager.QueueAndPlayDialogueById(0);    //Lässt vorherige Audios und Untertitel auslaufen
+        }
     }
 
-    private void back()
+    private void coding()
     {
-        testCube.Translate(-1, 0, 0);
+        if (testForDialogueManager())
+        {
+            dialogueManager.QueueAndPlayDialogueById(1);    //Lässt vorherige Audios und Untertitel auslaufen
+        }
     }
 
-    private void up()
+    private void interrupt()
     {
-        testCube.Translate(0, 1, 0);
+        if (testForDialogueManager())
+        {
+            dialogueManager.InterruptAndPlayDialogueById(2);    //Unterbricht aktuelle und darauffolgende Audios + Untertitel und spielt nur diesen aus
+        }
     }
 
-    private void down()
+    private bool testForDialogueManager()
     {
-        testCube.Translate(0, -1, 0);
-    }
-    private void left()
-    {
-        testCube.Translate(0, 0, 1);
-    }
-
-    private void right()
-    {
-        testCube.Translate(0, 0, -1);
+        if (dialogueManager != null)
+        {
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("Kein DialogueManager in der Szene gefunden!");
+            return false;
+        }
     }
 }
