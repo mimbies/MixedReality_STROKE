@@ -12,13 +12,13 @@ public class DialogueManager : MonoBehaviour
     public class Dialogue
     {
         public int id;                     // Eindeutige ID des Dialogs
-        public string text;                // Text für die Untertitel
+        public string text;                // Text fï¿½r die Untertitel
         public AudioClip audioClip;        // Audio-Datei
     }
 
     [Header("UI Komponenten")]
-    [SerializeField] private TextMeshPro subtitleText;       // Untertitel-Textfeld
-    [SerializeField] private AudioSource audioSource; // AudioSource für Dialoge
+    [SerializeField] private TextMeshProUGUI subtitleText;       // Untertitel-Textfeld
+    [SerializeField] private AudioSource audioSource; // AudioSource fï¿½r Dialoge
 
     [Header("Dialog-Daten")]
     [SerializeField] private List<Dialogue> dialogues = new List<Dialogue>(); // Liste aller Dialoge
@@ -93,7 +93,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // Coroutine für die Anzeige des Textes und das Abspielen des Audios
+    // Coroutine fï¿½r die Anzeige des Textes und das Abspielen des Audios
     private IEnumerator PlayDialogueCoroutine(Dialogue dialogue)
     {
         // Audio starten
@@ -114,7 +114,7 @@ public class DialogueManager : MonoBehaviour
         // Text ausblenden
         subtitleText.gameObject.SetActive(false);
 
-        // Coroutine abschließen
+        // Coroutine abschlieï¿½en
         currentCoroutine = null;
 
         PlayNextInQueue();

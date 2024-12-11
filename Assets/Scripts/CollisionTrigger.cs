@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class CollisionTrigger : MonoBehaviour
 {
     public UnityEvent trashIsThrownAway;
-    public GameObject trashTrigger;
+    public GameObject isTrigger;
 
 
 
-    public void OnTriggerEnter(Collider trashCube)
+    public void OnTriggerEnter(Collider other)
     {
-        if (trashCube.gameObject == trashTrigger)
+        if (other.gameObject == isTrigger)
         {
             trashIsThrownAway.Invoke();
         }
