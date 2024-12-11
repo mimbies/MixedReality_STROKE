@@ -18,6 +18,8 @@ public class DialogueManager : MonoBehaviour
 
     [Header("UI Komponenten")]
     [SerializeField] private TextMeshProUGUI subtitleText;       // Untertitel-Textfeld
+    [SerializeField] private GameObject subtitleBackground;       // Untertitel-Hintergrund
+
     [SerializeField] private AudioSource audioSource; // AudioSource f�r Dialoge
 
     [Header("Dialog-Daten")]
@@ -30,6 +32,7 @@ public class DialogueManager : MonoBehaviour
     {
         // Textfeld zu Beginn deaktivieren
         subtitleText.gameObject.SetActive(false);
+        subtitleBackground.SetActive(false);
     }
 
     public void InterruptAndPlayDialogueById(int id)
@@ -106,13 +109,15 @@ public class DialogueManager : MonoBehaviour
         // Text anzeigen
         subtitleText.SetText(dialogue.text);
         subtitleText.gameObject.SetActive(true);
+        subtitleBackground.SetActive(true);
 
         // Warte auf das Ende des Audios oder setze einen Standard-Wert
-        float waitTime = dialogue.audioClip != null ? dialogue.audioClip.length : 3f;
+        float waitTime = dialogue.audioClip != null ? dialogue.audioClip.length : 6f;
         yield return new WaitForSeconds(waitTime);
 
         // Text ausblenden
         subtitleText.gameObject.SetActive(false);
+        subtitleBackground.SetActive(false);
 
         // Coroutine abschlie�en
         currentCoroutine = null;
