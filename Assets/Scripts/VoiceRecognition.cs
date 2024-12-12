@@ -11,13 +11,17 @@ public class VoiceRecognition : MonoBehaviour
     private KeywordRecognizer keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
+    public GameObject objectToMove;
+
+
     DialogueManager dialogueManager;
 
     private void Start()
     {
         actions.Add("Hallo", hello);
-        actions.Add("Coding", coding); 
+        actions.Add("Coding", coding);
         actions.Add("Stop", interrupt);
+        actions.Add("Hallo JÃ¼rgen", hallojuergen);
 
 
 
@@ -39,15 +43,16 @@ public class VoiceRecognition : MonoBehaviour
     {
         if (testForDialogueManager())
         {
-            dialogueManager.QueueAndPlayDialogueById(0);    //Lässt vorherige Audios und Untertitel auslaufen
+            dialogueManager.QueueAndPlayDialogueById(0);    //Lï¿½sst vorherige Audios und Untertitel auslaufen
         }
+
     }
 
     private void coding()
     {
         if (testForDialogueManager())
         {
-            dialogueManager.QueueAndPlayDialogueById(1);    //Lässt vorherige Audios und Untertitel auslaufen
+            dialogueManager.QueueAndPlayDialogueById(1);    //Lï¿½sst vorherige Audios und Untertitel auslaufen
         }
     }
 
@@ -57,6 +62,21 @@ public class VoiceRecognition : MonoBehaviour
         {
             dialogueManager.InterruptAndPlayDialogueById(2);    //Unterbricht aktuelle und darauffolgende Audios + Untertitel und spielt nur diesen aus
         }
+    }
+
+    private void hallojuergen()
+    {
+
+        /*
+        objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, new Vector3(-10, 5, -12), 3 * Time.deltaTime);
+        aber er moved nicht smoothly... :( WARUM NICHT? */
+
+        objectToMove.transform.position += new Vector3(0, 5, 0);
+        Debug.Log(objectToMove.name + "has been moved up");
+
+
+
+
     }
 
     private bool testForDialogueManager()

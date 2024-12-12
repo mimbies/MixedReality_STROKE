@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CollisionTrigger : MonoBehaviour
+public class Trigger : MonoBehaviour
 {
-    public UnityEvent trashIsThrownAway;
+    public UnityEvent unityEvent;
     public GameObject isTrigger;
 
 
@@ -14,7 +14,7 @@ public class CollisionTrigger : MonoBehaviour
     {
         if (other.gameObject == isTrigger)
         {
-            trashIsThrownAway.Invoke();
+            unityEvent.Invoke();
         }
 
     }
