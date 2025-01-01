@@ -11,10 +11,11 @@ public class VoiceRecognition : MonoBehaviour
     private KeywordRecognizer keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
-    public GameObject objectToMove;
-
-
     DialogueManager dialogueManager;
+
+    
+    public Mover movescript;
+    public bool juergenHasBeenGreeted = false;
 
     private void Start()
     {
@@ -66,16 +67,9 @@ public class VoiceRecognition : MonoBehaviour
 
     private void hallojuergen()
     {
-
-        /*
-        objectToMove.transform.position = Vector3.MoveTowards(objectToMove.transform.position, new Vector3(-10, 5, -12), 3 * Time.deltaTime);
-        aber er moved nicht smoothly... :( WARUM NICHT? */
-
-        objectToMove.transform.position += new Vector3(0, 5, 0);
-        Debug.Log(objectToMove.name + "has been moved up");
-
-
-
+        juergenHasBeenGreeted = true;
+        movescript.Update();
+        Debug.Log("Jürgen is moving up");
 
     }
 
