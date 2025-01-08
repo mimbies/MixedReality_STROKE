@@ -14,7 +14,7 @@ public class VoiceRecognition : MonoBehaviour
     DialogueManager dialogueManager;
 
     
-    public Mover movescript;
+    public AnimationStateController animationStateController;
     public bool juergenHasBeenGreeted = false;
 
     private void Start()
@@ -68,8 +68,8 @@ public class VoiceRecognition : MonoBehaviour
     private void hallojuergen()
     {
         juergenHasBeenGreeted = true;
-        movescript.Update();
-        Debug.Log("Jürgen is moving up");
+        animationStateController.Update();
+        Debug.Log("Jürgen heard you");
 
     }
 
