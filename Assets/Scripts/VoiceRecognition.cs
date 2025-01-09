@@ -15,10 +15,12 @@ public class VoiceRecognition : MonoBehaviour
 
 
     public AnimationStateController animationStateController;
+
+    public bool nearbyEmily = false;
     public bool juergenHasBeenGreeted = false;
     public bool sendAmbulance = false;
-
     public bool emilyStandsUp = false;
+
 
     public int fastMethodSteps = 0;
 
@@ -34,8 +36,8 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("aufstehen", emily_aufstehen);      //Kannst du aufstehen?
         actions.Add("Arme ausstrecken", emily_armeausstrecken); //Kannst du deine Arme ausstrecken?
         actions.Add("linkes Bein", emily_linkesbein);   // Kannst du dich auf dein linkes Bein stellen?
-        actions.Add("Heute ist Mittwoch, es soll ein sonniger Tag werden", emily_nachsprechen); //geht das?
-        actions.Add("Bushaltestelle", krankenwagen_wo); //Wir sind an einer Bushaltestelle neben einem Park -- genauer?
+        actions.Add("Heute ist Mittwoch, es soll ein sonniger Tag werden", emily_nachsprechen); //geht omg
+        actions.Add("Bushaltestelle", krankenwagen_wo); //ungenau?
         actions.Add("eine Frau", krankenwagen_wer); // Eine Frau mit dem Namen Emily?
         actions.Add("Schlaganfall", krankenwagen_was); //Sie hat vermutlich einen Schlaganfall
         actions.Add("gelehmt", krankenwagen_symptomGelaehmt);
@@ -90,13 +92,23 @@ public class VoiceRecognition : MonoBehaviour
 
     }
 
+    public void changeNearbyEmily(){
+
+        nearbyEmily = true;
+    }
+
     private void emily_allesokay()
     {
-        fastMethodSteps += 1;
+        if (nearbyEmily)
+        {
+            fastMethodSteps += 1;
 
-        Debug.Log("asked emily if she's okay");
-        
-        //dialogueManager.QueueAndPlayDialogueById();
+            Debug.Log("asked emily if she's okay");
+
+            dialogueManager.QueueAndPlayDialogueById(8); //Emily says shes okay
+
+            dialogueManager.QueueAndPlayDialogueById(9); //Narrator prompts you to ask for her name
+        }
     }
 
     private void emily_deinname()
@@ -105,9 +117,12 @@ public class VoiceRecognition : MonoBehaviour
         {
 
             Debug.Log("asked for emilys name");
-            //emily should reply with her name, maybe a little slurred
 
             fastMethodSteps += 1;
+
+            dialogueManager.QueueAndPlayDialogueById(10); //Emily replies with her name
+
+            dialogueManager.QueueAndPlayDialogueById(11); // Narrator prompts you to tell emily to stand up
         }
     }
     private void emily_aufstehen()
@@ -115,29 +130,18 @@ public class VoiceRecognition : MonoBehaviour
         if (fastMethodSteps == 2)
         {
 
-            Debug.Log("asked emily to stand up and smile");
-            //emily sitting animation transitions to her standing up, SLOWLY!!!
-            //then, she smiles awkwardly (only one side of her face moves up)
+            Debug.Log("asked emily to stand up (and smile)");
+            //she smiles a (only one side of her face moves up)
 
             emilyStandsUp = true;
 
             fastMethodSteps += 1;
+
+            dialogueManager.QueueAndPlayDialogueById(12); // Narrator explains that Emily seems unwell
+
+            dialogueManager.QueueAndPlayDialogueById(13); //N prompts you to ask emily to extend her arms
         }
-        /*dialogueManager.QueueAndPlayDialogueById(XYZ);
-          
-        XYZ: "Auch wenn Betroffene oft behaupten es gehe ihnen gut,
-        oder es sei nicht so schlimm und ihnen ist nur ein bisschen schwindelig,
-        kann das dennoch ein Anzeichen für einen Schlaganfall sein.
-        ...
-        wenn das durchgelaufen ist, erst DANN:
 
-        dialogueManager.QueueAndPlayDialogueById(XYZ+1)
-
-        XYZ+1: "Fordere Emily auf ihre Arme auszustrecken, die Handflächen dabei nach oben zu halten,
-         auf dem linken Bein zu stehen und das rechte etwas anzuwinkeln" (Arms/Arme)"
-
-        funktioniert das so?
-        */
 
 
 
@@ -150,11 +154,10 @@ public class VoiceRecognition : MonoBehaviour
 
             Debug.Log("asked emily to extend her arms");
             //emily standing animation transitions to her raising her arms, one more than the other
-            //emily makes noises of confusion?
-
-            //wie wollen wir das mit den Handflächen nach oben handlen? einfach ein weiterer Schritt? sonst wird der voice command zu lang i think
 
             fastMethodSteps += 1;
+
+            dialogueManager.QueueAndPlayDialogueById(14);
         }
     }
 
@@ -169,19 +172,11 @@ public class VoiceRecognition : MonoBehaviour
 
 
             fastMethodSteps += 1;
+
+            dialogueManager.QueueAndPlayDialogueById(15); //N prompts you to ask emily to speak after you
         }
 
-        //A Done
 
-        /* 
-        "Das sieht nicht gut aus. Hast du gesehen, wie schwer ihr das gefallen ist? Sie hat es kaum geschafft das rechte Bein vom Boden zu erheben, geschweige denn die Balance zu halten.
-
-        Auch das spricht leider dafür, dass Emily einen Schlaganfall haben könnte.
-
-        Wende bitte auch den dritten Schritt der Fast Methode an (Speech/Sprache). Lass sie ein oder zwei einfache Sätze sagen und schau, ob sie damit Schwierigkeiten hat, oder nicht:
-
-        Lass sie sagen: "Heute ist Mittwoch, es soll ein sonniger Tag werden"
-        */
     }
 
     private void emily_nachsprechen()
@@ -192,16 +187,18 @@ public class VoiceRecognition : MonoBehaviour
         {
 
             Debug.Log("asked emily to speak after you");
-            //Emily speaks after you, slow and broken sentences
 
             fastMethodSteps += 1;
-            Debug.Log(fastMethodSteps);
+
+            dialogueManager.QueueAndPlayDialogueById(16); //Emily speaks after you, slow and broken sentences
+
+            dialogueManager.QueueAndPlayDialogueById(17); //N explains that EMily might suffer from a stroke.
+                                                          // Prompts you to pick up her phone
+
+            //MISSING: dialogueManager.QueueAndPlayDialogueById(18); // prompt to call 911 - implement somewhere with phone
+            //MISSING: dialogueManager.QueueAndPlayDialogueById(19);
         }
 
-        /*"Das sieht wirklich gar nicht gut aus für Emily.
-         Sie hat sichtlich Schwierigkeiten überhaupt mehr als ein oder zwei Worte flüssig zu sprechen und ich bin auch nicht sicher, ob sie dich wirklich verstanden hat.
-
-        Du solltest den Krankenwagen rufen. Nimm dazu Emily's handy, welches neben ihr auf dem Boden liegt, und wähle die 112. */
 
     }
 
@@ -215,10 +212,13 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics location");
 
             fastMethodSteps += 1;
-            Debug.Log(fastMethodSteps);
+
+            dialogueManager.QueueAndPlayDialogueById(20); //Paramedics ask whos hurt
+
+
         }
 
-        //After: paramedics ask whos hurt
+
 
     }
 
@@ -231,10 +231,11 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics whos hurt");
 
             fastMethodSteps += 1;
-            Debug.Log(fastMethodSteps);
+
+            dialogueManager.QueueAndPlayDialogueById(21); //paramedics ask what happened
         }
 
-        //After: paramedics ask what happened
+
 
     }
 
@@ -247,7 +248,9 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics what happened");
 
             fastMethodSteps += 1;
-            Debug.Log(fastMethodSteps);
+
+            //MISSING dialogueManager.QueueAndPlayDialogueById(23); //paramedics ask for details:  was sind symptome?
+
         }
 
         //After: paramedics ask for details: Bist du sicher, was sind symptome?
@@ -263,7 +266,12 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics about balance problems");
 
             fastMethodSteps += 1; // 10 or 11 or 12
-            Debug.Log(fastMethodSteps);
+
+            if (fastMethodSteps == 12)
+            {
+                dialogueManager.QueueAndPlayDialogueById(22); //paramedics ask you confirm you understood
+            }
+
         }
 
         //After: paramedics ask for 3 details in total
@@ -279,10 +287,15 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics about partial paralysis");
 
             fastMethodSteps += 1; // 10 or 11 or 12
-            Debug.Log(fastMethodSteps);
+
+            if (fastMethodSteps == 12)
+            {
+                dialogueManager.QueueAndPlayDialogueById(22); //paramedics ask you confirm you understood
+            }
+
         }
 
-        //After: paramedics ask for 3 details in total
+
 
     }
 
@@ -296,10 +309,14 @@ public class VoiceRecognition : MonoBehaviour
             ;
 
             fastMethodSteps += 1; // 10 or 11 or 12
-            Debug.Log(fastMethodSteps);
+
+            if (fastMethodSteps == 12)
+            {
+                dialogueManager.QueueAndPlayDialogueById(22); //paramedics ask you confirm you understood
+            }
         }
 
-        //After: paramedics tell you to wait and to distract emily etc. then they ask if you understood. say yes
+
 
     }
 
@@ -315,7 +332,7 @@ public class VoiceRecognition : MonoBehaviour
             sendAmbulance = true;
 
         }
-        //After: paramedics tell you they are on their way and hang up.
+
     }
 
 
