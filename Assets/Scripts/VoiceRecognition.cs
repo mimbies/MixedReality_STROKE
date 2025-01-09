@@ -92,7 +92,8 @@ public class VoiceRecognition : MonoBehaviour
 
     }
 
-    public void changeNearbyEmily(){
+    public void changeNearbyEmily()
+    {
 
         nearbyEmily = true;
     }
@@ -195,8 +196,8 @@ public class VoiceRecognition : MonoBehaviour
             dialogueManager.QueueAndPlayDialogueById(17); //N explains that EMily might suffer from a stroke.
                                                           // Prompts you to pick up her phone
 
-            //MISSING: dialogueManager.QueueAndPlayDialogueById(18); // prompt to call 911 - implement somewhere with phone
-            //MISSING: dialogueManager.QueueAndPlayDialogueById(19);
+            dialogueManager.QueueAndPlayDialogueById(18); // prompt to call 911 - implement somewhere with phone maybe..
+
         }
 
 
