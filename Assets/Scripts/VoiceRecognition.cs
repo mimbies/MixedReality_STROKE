@@ -18,6 +18,8 @@ public class VoiceRecognition : MonoBehaviour
     public bool juergenHasBeenGreeted = false;
     public bool sendAmbulance = false;
 
+    public bool emilyStandsUp = false;
+
     public int fastMethodSteps = 0;
 
     private void Start()
@@ -83,7 +85,7 @@ public class VoiceRecognition : MonoBehaviour
     private void hallojuergen()
     {
         juergenHasBeenGreeted = true;       //sets transition variable to true
-        animationStateController.Update();  //sitting animation transitions to waving animation
+                                            //sitting animation transitions to waving animation
         Debug.Log("Jürgen heard you");
 
     }
@@ -93,7 +95,8 @@ public class VoiceRecognition : MonoBehaviour
         fastMethodSteps += 1;
 
         Debug.Log("asked emily if she's okay");
-        //emily should reply with "yes, just dizzy", slowly / distracted
+        
+        //dialogueManager.QueueAndPlayDialogueById();
     }
 
     private void emily_deinname()
@@ -115,6 +118,8 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("asked emily to stand up and smile");
             //emily sitting animation transitions to her standing up, SLOWLY!!!
             //then, she smiles awkwardly (only one side of her face moves up)
+
+            emilyStandsUp = true;
 
             fastMethodSteps += 1;
         }
@@ -190,6 +195,7 @@ public class VoiceRecognition : MonoBehaviour
             //Emily speaks after you, slow and broken sentences
 
             fastMethodSteps += 1;
+            Debug.Log(fastMethodSteps);
         }
 
         /*"Das sieht wirklich gar nicht gut aus für Emily.
@@ -209,6 +215,7 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics location");
 
             fastMethodSteps += 1;
+            Debug.Log(fastMethodSteps);
         }
 
         //After: paramedics ask whos hurt
@@ -224,6 +231,7 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics whos hurt");
 
             fastMethodSteps += 1;
+            Debug.Log(fastMethodSteps);
         }
 
         //After: paramedics ask what happened
@@ -239,6 +247,7 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics what happened");
 
             fastMethodSteps += 1;
+            Debug.Log(fastMethodSteps);
         }
 
         //After: paramedics ask for details: Bist du sicher, was sind symptome?
@@ -254,6 +263,7 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("told paramedics about balance problems");
 
             fastMethodSteps += 1; // 10 or 11 or 12
+            Debug.Log(fastMethodSteps);
         }
 
         //After: paramedics ask for 3 details in total
@@ -264,11 +274,12 @@ public class VoiceRecognition : MonoBehaviour
     {
 
         if (fastMethodSteps > 8)
-        { //9
+        { //10
 
             Debug.Log("told paramedics about partial paralysis");
 
             fastMethodSteps += 1; // 10 or 11 or 12
+            Debug.Log(fastMethodSteps);
         }
 
         //After: paramedics ask for 3 details in total
@@ -279,11 +290,13 @@ public class VoiceRecognition : MonoBehaviour
     {
 
         if (fastMethodSteps > 8)
-        { //10
+        { //11
 
-            Debug.Log("told paramedics about partial paralysis");
+            Debug.Log("told paramedics about pproblems with speaking");
+            ;
 
             fastMethodSteps += 1; // 10 or 11 or 12
+            Debug.Log(fastMethodSteps);
         }
 
         //After: paramedics tell you to wait and to distract emily etc. then they ask if you understood. say yes

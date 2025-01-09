@@ -22,14 +22,20 @@ public class AnimationStateController : MonoBehaviour
 
         if (voiceRecognition.juergenHasBeenGreeted)
         {
-            anim.SetBool("juergenHasBeenGreeted", true);
+            anim.SetBool("juergenHasBeenGreetedAnim", true);
         }
 
 
-        if (voiceRecognition.sendAmbulance)
+        else if (voiceRecognition.sendAmbulance)
         {
             anim.SetBool("sendAmbulance", true);
         }
+
+        else if (voiceRecognition.emilyStandsUp)
+        {
+            anim.SetBool("emilyStandsUpAnim", true);
+        }
+
 
 
 
