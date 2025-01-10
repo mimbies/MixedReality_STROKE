@@ -26,12 +26,12 @@ public class AnimationStateController : MonoBehaviour
         }
 
 
-        else if (voiceRecognition.sendAmbulance)
+        if (voiceRecognition.sendAmbulance)
         {
             anim.SetBool("sendAmbulance", true);
         }
 
-        else if (voiceRecognition.emilyStandsUp)
+        if (voiceRecognition.emilyStandsUp)
         {
             anim.SetBool("emilyStandsUpAnim", true);
         }

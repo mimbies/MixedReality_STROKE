@@ -36,7 +36,8 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("aufstehen", emily_aufstehen);      //Kannst du aufstehen?
         actions.Add("Arme ausstrecken", emily_armeausstrecken); //Kannst du deine Arme ausstrecken?
         actions.Add("linkes Bein", emily_linkesbein);   // Kannst du dich auf dein linkes Bein stellen?
-        actions.Add("Heute ist Mittwoch, es soll ein sonniger Tag werden", emily_nachsprechen); //geht omg
+        actions.Add("sonniger Tag", emily_nachsprechen); //geht omg
+        actions.Add("Heute ist Mittwoch", emily_nachsprechen); //geht omg
         actions.Add("Bushaltestelle", krankenwagen_wo); //ungenau?
         actions.Add("eine Frau", krankenwagen_wer); // Eine Frau mit dem Namen Emily?
         actions.Add("Schlaganfall", krankenwagen_was); //Sie hat vermutlich einen Schlaganfall
@@ -102,13 +103,16 @@ public class VoiceRecognition : MonoBehaviour
     {
         if (nearbyEmily)
         {
-            fastMethodSteps += 1;
+            if (fastMethodSteps == 0)
+            {
+                fastMethodSteps =1;
 
-            Debug.Log("asked emily if she's okay");
+                Debug.Log("asked emily if she's okay");
 
-            dialogueManager.QueueAndPlayDialogueById(8); //Emily says shes okay
+                dialogueManager.QueueAndPlayDialogueById(8); //Emily says shes okay
 
-            dialogueManager.QueueAndPlayDialogueById(9); //Narrator prompts you to ask for her name
+                dialogueManager.QueueAndPlayDialogueById(9); //Narrator prompts you to ask for her name
+            }
         }
     }
 
@@ -119,7 +123,7 @@ public class VoiceRecognition : MonoBehaviour
 
             Debug.Log("asked for emilys name");
 
-            fastMethodSteps += 1;
+            fastMethodSteps =2;
 
             dialogueManager.QueueAndPlayDialogueById(10); //Emily replies with her name
 
@@ -136,7 +140,7 @@ public class VoiceRecognition : MonoBehaviour
 
             emilyStandsUp = true;
 
-            fastMethodSteps += 1;
+            fastMethodSteps =3;
 
             dialogueManager.QueueAndPlayDialogueById(12); // Narrator explains that Emily seems unwell
 
@@ -156,7 +160,7 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("asked emily to extend her arms");
             //emily standing animation transitions to her raising her arms, one more than the other
 
-            fastMethodSteps += 1;
+            fastMethodSteps =4;
 
             dialogueManager.QueueAndPlayDialogueById(14);
         }
@@ -172,7 +176,7 @@ public class VoiceRecognition : MonoBehaviour
             //how to animate?
 
 
-            fastMethodSteps += 1;
+            fastMethodSteps =5;
 
             dialogueManager.QueueAndPlayDialogueById(15); //N prompts you to ask emily to speak after you
         }
@@ -189,7 +193,7 @@ public class VoiceRecognition : MonoBehaviour
 
             Debug.Log("asked emily to speak after you");
 
-            fastMethodSteps += 1;
+            fastMethodSteps =6;
 
             dialogueManager.QueueAndPlayDialogueById(16); //Emily speaks after you, slow and broken sentences
 
@@ -212,7 +216,7 @@ public class VoiceRecognition : MonoBehaviour
 
             Debug.Log("told paramedics location");
 
-            fastMethodSteps += 1;
+            fastMethodSteps =7;
 
             dialogueManager.QueueAndPlayDialogueById(20); //Paramedics ask whos hurt
 
@@ -231,7 +235,7 @@ public class VoiceRecognition : MonoBehaviour
 
             Debug.Log("told paramedics whos hurt");
 
-            fastMethodSteps += 1;
+            fastMethodSteps =8;
 
             dialogueManager.QueueAndPlayDialogueById(21); //paramedics ask what happened
         }
@@ -248,7 +252,7 @@ public class VoiceRecognition : MonoBehaviour
 
             Debug.Log("told paramedics what happened");
 
-            fastMethodSteps += 1;
+            fastMethodSteps =9;
 
             //MISSING dialogueManager.QueueAndPlayDialogueById(23); //paramedics ask for details:  was sind symptome?
 

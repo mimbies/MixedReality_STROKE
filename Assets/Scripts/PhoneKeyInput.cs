@@ -14,20 +14,27 @@ public class PhoneKeyInput : MonoBehaviour
 
     DialogueManager dialogueManager;
 
+    public void Start()
+    {
+        dialogueManager = FindObjectOfType<DialogueManager>();
+    }
+
     public void KeyButton(string key)
     {
-        if (characterInputCount < keyInputField.characterLimit)
-        {
+        
             keyInputField.text += key;
+              Debug.Log(key);
             characterInputCount++;
 
-        }
+        
     }
 
     public void EnterButton()
     {
+        Debug.Log("entersenterbutton");
         if (keyInputField.text == ambulanceNr)
         {
+            Debug.Log("hi");
             dialogueManager.QueueAndPlayDialogueById(19);
 
         }
