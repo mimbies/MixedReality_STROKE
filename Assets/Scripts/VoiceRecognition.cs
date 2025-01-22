@@ -52,6 +52,8 @@ public class VoiceRecognition : MonoBehaviour
         keywordRecognizer.Start(); //nur Starten und stoppen bei Gebrauch um Laufzeit zu verbessern
 
         dialogueManager = FindObjectOfType<DialogueManager>();
+
+        StartCoroutine(Waiter());
     }
 
     private void speechDistributer(PhraseRecognizedEventArgs speech)
@@ -142,6 +144,8 @@ public class VoiceRecognition : MonoBehaviour
             emilyStandsUp = true;
 
             fastMethodSteps = 3;
+
+            StartCoroutine(Waiter());
 
             dialogueManager.QueueAndPlayDialogueById(12); // Narrator explains that Emily seems unwell
 
@@ -280,7 +284,7 @@ public class VoiceRecognition : MonoBehaviour
 
         }
 
-        
+
 
     }
 
@@ -355,5 +359,11 @@ public class VoiceRecognition : MonoBehaviour
             Debug.LogWarning("Kein DialogueManager in der Szene gefunden!");
             return false;
         }
+    }
+
+    private IEnumerator Waiter(){
+
+        yield return new WaitForSeconds(3);
+
     }
 }
