@@ -17,6 +17,9 @@ public class VoiceRecognition : MonoBehaviour
     public bool juergenHasBeenGreeted = false;
     public bool sendAmbulance = false;
     public bool emilyStandsUp = false;
+    public bool emilyExtendsArms = false;
+
+    public bool emilyOneLeg = false;
 
 
     public int fastMethodSteps = 0;
@@ -53,7 +56,7 @@ public class VoiceRecognition : MonoBehaviour
 
         dialogueManager = FindObjectOfType<DialogueManager>();
 
-        StartCoroutine(Waiter());
+
     }
 
     private void speechDistributer(PhraseRecognizedEventArgs speech)
@@ -145,7 +148,7 @@ public class VoiceRecognition : MonoBehaviour
 
             fastMethodSteps = 3;
 
-            StartCoroutine(Waiter());
+
 
             dialogueManager.QueueAndPlayDialogueById(12); // Narrator explains that Emily seems unwell
 
@@ -165,9 +168,12 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("asked emily to extend her arms");
             //emily standing animation transitions to her raising her arms, one more than the other
 
+            emilyExtendsArms = true;
+
             fastMethodSteps = 4;
 
             dialogueManager.QueueAndPlayDialogueById(14);
+
         }
     }
 
@@ -179,6 +185,8 @@ public class VoiceRecognition : MonoBehaviour
             Debug.Log("asked emily to stand on her left leg and bend the other one");
             //emily is struggling to follow your instructions, not able to raise right leg, losing balance
             //how to animate?
+
+            emilyOneLeg = true;
 
 
             fastMethodSteps = 5;
@@ -361,9 +369,4 @@ public class VoiceRecognition : MonoBehaviour
         }
     }
 
-    private IEnumerator Waiter(){
-
-        yield return new WaitForSeconds(3);
-
-    }
 }

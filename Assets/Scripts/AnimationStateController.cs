@@ -36,6 +36,15 @@ public class AnimationStateController : MonoBehaviour
             anim.SetBool("emilyStandsUpAnim", true);
         }
 
+        if (voiceRecognition.emilyExtendsArms)
+        {
+            anim.SetBool("emilyRaisesArmAnim", true);
+        }
+
+        if(voiceRecognition.emilyOneLeg){
+            anim.SetBool("emilyOneLegAnim", true);
+        }
+
 
 
 
