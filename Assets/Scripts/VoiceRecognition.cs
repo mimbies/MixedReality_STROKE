@@ -36,6 +36,7 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("wie heißt du", emily_deinname);
         actions.Add("aufstehen", emily_aufstehen);      //Kannst du aufstehen?
         actions.Add("Arme ausstrecken", emily_armeausstrecken); //Kannst du deine Arme ausstrecken?
+        actions.Add("Arme", emily_armeausstrecken); //Kannst du deine Arme ausstrecken?
         actions.Add("linkes Bein", emily_linkesbein);   // Kannst du dich auf dein linkes Bein stellen?
         actions.Add("sonniger Tag", emily_nachsprechen);
         actions.Add("Heute ist Mittwoch, es soll ein sonniger Tag werden", emily_nachsprechen);

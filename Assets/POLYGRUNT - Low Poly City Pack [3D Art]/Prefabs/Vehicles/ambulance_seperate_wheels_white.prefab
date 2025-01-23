@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 7078949826188807284}
   - component: {fileID: 5033208082648070334}
   - component: {fileID: 6834617491565795690}
+  - component: {fileID: 7028905239000646474}
   m_Layer: 0
   m_Name: ambulance_seperate_wheels_white
   m_TagString: Untagged
@@ -398,7 +399,7 @@ Transform:
   - {fileID: 2132766933333992268}
   - {fileID: 6372304417937907562}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7078949826188807284
 MeshFilter:
@@ -464,6 +465,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2043665969045634028, guid: 381676c8626041d4089054d22d22cc6b, type: 3}
+--- !u!95 &7028905239000646474
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6834617491565795691}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d31723ab42eac6d4b982b1b4a3accca7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7148997113838093206
 GameObject:
   m_ObjectHideFlags: 0
