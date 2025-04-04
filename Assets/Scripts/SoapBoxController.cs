@@ -26,6 +26,10 @@ public class SoapBoxController : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+        
+        if(targetWaypoint.gameObject.tag != null && targetWaypoint.gameObject.tag =="TELEPORTATION_WAYPOINT"){ //TELEPORTATION_WAYPOINT
+            transform.position = targetWaypoint.position;
+        } 
 
         // Check if the car reached the current waypoint
         if (distance < 0.1f)
