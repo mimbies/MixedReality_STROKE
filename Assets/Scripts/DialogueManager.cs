@@ -54,7 +54,7 @@ public class DialogueManager : MonoBehaviour
             float x = inWorldSubtitleText.gameObject.transform.eulerAngles.x;
             float y = inWorldSubtitleText.gameObject.transform.eulerAngles.y;
             float z = inWorldSubtitleText.gameObject.transform.eulerAngles.z;
-            inWorldSubtitleText.gameObject.transform.rotation = Quaternion.Euler(new Vector3(x , y + 180f, z));
+            inWorldSubtitleText.gameObject.transform.rotation = Quaternion.Euler(new Vector3(-x , y + 180f, z));
             Vector3 currentEuler = subtitleHolder.transform.eulerAngles;
             subtitleHolder.transform.rotation = Quaternion.Euler(0f, currentEuler.y, 0f);
         }
