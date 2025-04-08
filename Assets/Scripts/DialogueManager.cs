@@ -6,7 +6,9 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-
+    
+    [SerializeField] private bool playSomething;       // Untertitel-Textfeld
+    int playSomethingi = 3;
 
     [System.Serializable]
     public class Dialogue
@@ -17,8 +19,11 @@ public class DialogueManager : MonoBehaviour
     }
 
     [Header("UI Komponenten")]
-    [SerializeField] private TextMeshProUGUI subtitleText;       // Untertitel-Textfeld
+    [SerializeField] private TextMeshProUGUI canvasSubtitleText;       // Untertitel-Textfeld
     [SerializeField] private GameObject subtitleBackground;       // Untertitel-Hintergrund
+    [SerializeField] private TextMeshPro inWorldSubtitleText;       // Untertitel-Textfeld
+    [SerializeField] private GameObject subtitleHolder;       // Untertitel-Textfeld
+    [SerializeField] private bool useInWorldSubtitles;
 
     [SerializeField] private AudioSource audioSource; // AudioSource f�r Dialoge
 
@@ -31,8 +36,28 @@ public class DialogueManager : MonoBehaviour
     private void Awake()
     {
         // Textfeld zu Beginn deaktivieren
-        subtitleText.gameObject.SetActive(false);
-        subtitleBackground.SetActive(false);
+        if(!useInWorldSubtitles) {
+
+            canvasSubtitleText.gameObject.SetActive(false);
+            subtitleBackground.SetActive(false);
+        }
+    }
+
+    private void Update(){
+        if(playSomething){
+            InterruptAndPlayDialogueById(playSomethingi);
+            playSomethingi += 1;
+            playSomething = false;
+        }
+        if(useInWorldSubtitles){
+            inWorldSubtitleText.gameObject.transform.LookAt(Camera.main.transform);
+            float x = inWorldSubtitleText.gameObject.transform.eulerAngles.x;
+            float y = inWorldSubtitleText.gameObject.transform.eulerAngles.y;
+            float z = inWorldSubtitleText.gameObject.transform.eulerAngles.z;
+            inWorldSubtitleText.gameObject.transform.rotation = Quaternion.Euler(new Vector3(x , y + 180f, z));
+            Vector3 currentEuler = subtitleHolder.transform.eulerAngles;
+            subtitleHolder.transform.rotation = Quaternion.Euler(0f, currentEuler.y, 0f);
+        }
     }
 
     public void InterruptAndPlayDialogueById(int id)
@@ -106,18 +131,24 @@ public class DialogueManager : MonoBehaviour
             audioSource.Play();
         }
 
-        // Text anzeigen
-        subtitleText.SetText(dialogue.text);
-        subtitleText.gameObject.SetActive(true);
-        subtitleBackground.SetActive(true);
+        if(!useInWorldSubtitles) {
+            // Text anzeigen
+            canvasSubtitleText.SetText(dialogue.text);
+            canvasSubtitleText.gameObject.SetActive(true);
+            subtitleBackground.SetActive(true);
+        } else {
+            inWorldSubtitleText.SetText(dialogue.text);
+        }
 
         // Warte auf das Ende des Audios oder setze einen Standard-Wert
         float waitTime = dialogue.audioClip != null ? dialogue.audioClip.length : 6f;
         yield return new WaitForSeconds(waitTime);
 
-        // Text ausblenden
-        subtitleText.gameObject.SetActive(false);
-        subtitleBackground.SetActive(false);
+        if(!useInWorldSubtitles) {
+            // Text ausblenden
+            canvasSubtitleText.gameObject.SetActive(false);
+            subtitleBackground.SetActive(false);
+        }
 
         // Coroutine abschlie�en
         currentCoroutine = null;
