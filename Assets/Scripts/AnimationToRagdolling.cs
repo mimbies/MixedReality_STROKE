@@ -5,9 +5,14 @@ using UnityEngine;
 public class AnimationToRagdolling : MonoBehaviour
 {
     public GameObject animatorToDisable;
+    public RuntimeAnimatorController switchToTHisANimator;
+
+
     public void disableAnimator()
     {
         animatorToDisable.GetComponent<Animator>().enabled = false;
+
+
 
 
     }
