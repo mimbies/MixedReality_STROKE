@@ -13,6 +13,12 @@ public class VoiceRecognition : MonoBehaviour
 
     DialogueManager dialogueManager;
 
+    //KREISLAUF
+    public bool kollapsScene = false;
+
+    //KREISLAUF ENDE
+
+    //SCHLAGANFALL
     public bool nearbyEmily = false;
     public bool juergenHasBeenGreeted = false;
     public bool sendAmbulance = false;
@@ -21,11 +27,102 @@ public class VoiceRecognition : MonoBehaviour
 
     public bool emilyOneLeg = false;
 
-
     public int fastMethodSteps = 0;
+
+    //SCHLAGANFALL ENDE 
 
     private void Start()
     {
+        //KREISLAUF:
+        actions.Add("Hallo", ansprechenK);
+        actions.Add("Alles okay", ansprechenK);
+        actions.Add("Geht es ihnen gut", ansprechenK);
+        actions.Add("Wie geht es ihnen", ansprechenK);
+        actions.Add("Alles ok", ansprechenK);
+        actions.Add("Alles ok bei ihnen", ansprechenK);
+        actions.Add("Sind Sie in Ordnung", ansprechenK);
+        actions.Add("Entschuldigung", ansprechenK);
+
+        actions.Add("Wie geht es ihnen", fragenK);
+        actions.Add("Wie geht es dir", fragenK);
+        actions.Add("Geht es ihnen gut", fragenK);
+        actions.Add("Geht es dir gut", fragenK);
+        actions.Add("Geht es ihnen besser", fragenK);
+        actions.Add("Geht es dir besser", fragenK);
+
+        actions.Add("Supermarkt", ambulanceWhereK);
+        actions.Add("Vor dem Supermarkt", ambulanceWhereK);
+        actions.Add("vor dem großen Supermarkt", ambulanceWhereK);
+        actions.Add("großen Supermarkt", ambulanceWhereK);
+        actions.Add("großer Supermarkt", ambulanceWhereK);
+        actions.Add("auf einer Bank", ambulanceWhereK);
+        actions.Add("Bank vor einem Supermarkt", ambulanceWhereK);
+        actions.Add("Bank vor Supermarkt", ambulanceWhereK);
+        actions.Add("neben einem Parkplatz", ambulanceWhereK);
+        actions.Add("Parkplatz vor dem Supermarkt", ambulanceWhereK);
+        actions.Add("Parkplatz vor einem Supermarkt", ambulanceWhereK);
+        actions.Add("Parkplatz beim Supermarkt", ambulanceWhereK);
+        actions.Add("Parkplatz", ambulanceWhereK);
+
+        actions.Add("Jemand hat einen Hitzeschlag", ambulanceWhatK);
+        actions.Add("Jemand hat einen Hitzschlag", ambulanceWhatK);
+        actions.Add("Ein Mann hat einen Hitzschlag", ambulanceWhatK);
+        actions.Add("Eine Person hat einen Hitzschlag", ambulanceWhatK);
+        actions.Add("Jemand ist überhitzt", ambulanceWhatK);
+        actions.Add("Ein Mann ist fast bewusstlos", ambulanceWhatK);
+        actions.Add("Jemand ist benommen", ambulanceWhatK);
+        actions.Add("Ein Mann ist benommen", ambulanceWhatK);
+        actions.Add("Eine Person ist benommen", ambulanceWhatK);
+        actions.Add("Hitzeschlag", ambulanceWhatK);
+        actions.Add("Hitzschlag", ambulanceWhatK);
+        actions.Add("Kreislaufkollaps", ambulanceWhatK);
+        actions.Add("Eine Person hat einen Kreislaufkollaps", ambulanceWhatK);
+        actions.Add("Jemand hat einen Kreislaufkollaps", ambulanceWhatK);
+        actions.Add("Ein Mann hat einen Kreislaufkollaps", ambulanceWhatK);
+        actions.Add("Eine Person hat einen Kreislaufzusammenbruch", ambulanceWhatK);
+        actions.Add("Jemand hat einen Kreislaufzusammenbruch", ambulanceWhatK);
+        actions.Add("Ein Mann hat einen Kreislaufzusammenbruch", ambulanceWhatK);
+        actions.Add("Kreislauf zusammengebrochen", ambulanceWhatK);
+        actions.Add("Sein Kreislauf ist zusammengebrochen", ambulanceWhatK);
+
+        actions.Add("Nur eine", ambulanceHowManyK);
+        actions.Add("Nur einer", ambulanceHowManyK);
+        actions.Add("Nur ein Mann", ambulanceHowManyK);
+        actions.Add("Eine einzige", ambulanceHowManyK);
+        actions.Add("Nur eine einzige", ambulanceHowManyK);
+        actions.Add("Einer", ambulanceHowManyK);
+        actions.Add("Eine", ambulanceHowManyK);
+        actions.Add("Ein einziger", ambulanceHowManyK);
+        actions.Add("Eine Einzelne", ambulanceHowManyK);
+        actions.Add("Ein Einzelner", ambulanceHowManyK);
+        actions.Add("Nur ein einziger", ambulanceHowManyK);
+        actions.Add("Nur eine Einzelne", ambulanceHowManyK);
+        actions.Add("Nur ein Einzelner", ambulanceHowManyK);
+        actions.Add("Eine Person", ambulanceHowManyK);
+        actions.Add("Nur eine Person", ambulanceHowManyK);
+
+        actions.Add("Ja gerade so", ambulanceBewusstseinK);
+        actions.Add("Ja", ambulanceBewusstseinK);
+        actions.Add("So halb", ambulanceBewusstseinK);
+        actions.Add("Ich glaube schon", ambulanceBewusstseinK);
+        actions.Add("Ich denke schon", ambulanceBewusstseinK);
+        actions.Add("Ja Ich glaube schon", ambulanceBewusstseinK);
+        actions.Add("Ja Ich denke schon", ambulanceBewusstseinK);
+        actions.Add("Ja er atmet", ambulanceBewusstseinK);
+
+
+
+
+
+
+
+
+        //KREISLAUF ENDE
+
+
+
+
+        // SCHLAGANFALL:
         actions.Add("Hallo Jürgen", hallojuergen);
         actions.Add("Alles okay", emily_allesokay);     // Ist alles Okay?
         actions.Add("dein Name", emily_deinname);       // Wie ist dein Name? Oder: Wie heißt du? wollen wir mehr optionen haben?
@@ -48,7 +145,6 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("eine Frau", krankenwagen_wer);
         actions.Add("emily", krankenwagen_wer); // Eine Frau mit dem Namen Emily?
         actions.Add("Schlaganfall", krankenwagen_was); //Sie hat vermutlich einen Schlaganfall
-
         actions.Add("gelehmt", krankenwagen_symptomGelaehmt);
         actions.Add("balance", krankenwagen_symptomeBalance);
         actions.Add("ballons", krankenwagen_symptomeBalance);
@@ -58,6 +154,8 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("verstanden", krankenwagen_bestaetigung);
         actions.Add("Habe ich", krankenwagen_bestaetigung);
         actions.Add("Ich habe verstanden", krankenwagen_bestaetigung);
+
+        //SCHLAGANFALL ENDE
 
         keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += speechDistributer;
@@ -74,7 +172,84 @@ public class VoiceRecognition : MonoBehaviour
         actions[speech.text].Invoke();
     }
 
+    //KREISLAUF:
 
+    public void setKollapsSceneTrue()
+    {
+        if (kollapsScene == false)
+        {
+            kollapsScene = true;
+        }
+    }
+
+    private void ansprechenK()
+    {
+        if (testForDialogueManager() && kollapsScene)
+        {
+            dialogueManager.QueueAndPlayDialogueById(7);
+            dialogueManager.QueueAndPlayDialogueById(8);
+            dialogueManager.QueueAndPlayDialogueById(9);
+            dialogueManager.QueueAndPlayDialogueById(10);
+
+        }
+    }
+
+    private void fragenK()
+    {
+        if (testForDialogueManager() && kollapsScene)
+        {
+            dialogueManager.QueueAndPlayDialogueById(16);
+            dialogueManager.QueueAndPlayDialogueById(17);
+
+        }
+    }
+
+    private void ambulanceWhereK()
+    {
+        if (testForDialogueManager() && kollapsScene)
+        {
+            dialogueManager.QueueAndPlayDialogueById(19);
+
+        }
+    }
+
+    private void ambulanceWhatK()
+    {
+        if (testForDialogueManager() && kollapsScene)
+        {
+            dialogueManager.QueueAndPlayDialogueById(20);
+
+        }
+    }
+
+    private void ambulanceHowManyK()
+    {
+        if (testForDialogueManager() && kollapsScene)
+        {
+            dialogueManager.QueueAndPlayDialogueById(21);
+
+        }
+    }
+
+    private void ambulanceBewusstseinK()
+    {
+        if (testForDialogueManager() && kollapsScene)
+        {
+            dialogueManager.QueueAndPlayDialogueById(22);
+            dialogueManager.QueueAndPlayDialogueById(23);
+            dialogueManager.QueueAndPlayDialogueById(24);
+            dialogueManager.QueueAndPlayDialogueById(25);
+
+        }
+    }
+
+    //KREISLAUF ENDE
+
+
+
+
+
+    //SCHLAGANFALL:
     private void hello()
     {
         if (testForDialogueManager())
@@ -366,7 +541,7 @@ public class VoiceRecognition : MonoBehaviour
     }
 
 
-    //Still missing: Steps after calling the ambulance
+    //SCHLAGANFALL ENDE
 
     private bool testForDialogueManager()
     {
