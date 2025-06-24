@@ -115,6 +115,11 @@ public class VoiceRecognition : MonoBehaviour
 
 
 
+        actions.Add("Interrupt", interrupt);
+        actions.Add("Stop", interrupt);
+        actions.Add("Halts Maul", interrupt);
+
+
 
 
 
@@ -277,7 +282,7 @@ public class VoiceRecognition : MonoBehaviour
     {
         if (testForDialogueManager())
         {
-            dialogueManager.InterruptAndPlayDialogueById(2);    //Unterbricht aktuelle und darauffolgende Audios + Untertitel und spielt nur diesen aus
+            dialogueManager.InterruptAndPlayDialogueById(0);    //Unterbricht aktuelle und darauffolgende Audios + Untertitel und spielt nur diesen aus
         }
     }
 

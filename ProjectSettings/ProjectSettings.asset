@@ -764,6 +764,7 @@ PlayerSettings:
   metroSplashScreenUseBackgroundColor: 0
   platformCapabilities:
     WindowsStoreApps:
+      InternetClient: True
       Microphone: True
   metroTargetDeviceFamilies: {}
   metroFTAName: 
