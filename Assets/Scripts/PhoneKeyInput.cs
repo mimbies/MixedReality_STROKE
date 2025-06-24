@@ -13,7 +13,6 @@ public class PhoneKeyInput : MonoBehaviour
     private int characterInputCount;
 
     DialogueManager dialogueManager;
-    VoiceRecognition voiceRecognition;
 
     public void Start()
     {
@@ -35,14 +34,20 @@ public class PhoneKeyInput : MonoBehaviour
         Debug.Log("entersenterbutton");
         if (keyInputField.text == ambulanceNr)
         {
-            if (voiceRecognition.kollapsScene)
-            {
-                dialogueManager.QueueAndPlayDialogueById(18);
-            }
-            else
-            {
-                dialogueManager.QueueAndPlayDialogueById(19);
-            }
+
+            dialogueManager.QueueAndPlayDialogueById(19);
+
+
+        }
+
+    }
+    public void EnterButtonKollaps()
+    {
+        Debug.Log("enterkollapsenterbutton");
+        if (keyInputField.text == ambulanceNr)
+        {
+
+            dialogueManager.QueueAndPlayDialogueById(18);
 
         }
 

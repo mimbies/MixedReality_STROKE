@@ -16,6 +16,9 @@ public class VoiceRecognition : MonoBehaviour
     //KREISLAUF
     public bool kollapsScene = false;
 
+    public GameObject objectToSetActive;
+
+
     //KREISLAUF ENDE
 
     //SCHLAGANFALL
@@ -35,7 +38,7 @@ public class VoiceRecognition : MonoBehaviour
     {
         //KREISLAUF:
         actions.Add("Hallo", ansprechenK);
-        actions.Add("Alles okay", ansprechenK);
+        //actions.Add("Alles okay", ansprechenK);
         actions.Add("Geht es ihnen gut", ansprechenK);
         actions.Add("Wie geht es ihnen", ansprechenK);
         actions.Add("Alles ok", ansprechenK);
@@ -43,9 +46,9 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("Sind Sie in Ordnung", ansprechenK);
         actions.Add("Entschuldigung", ansprechenK);
 
-        actions.Add("Wie geht es ihnen", fragenK);
+        //actions.Add("Wie geht es ihnen", fragenK);
         actions.Add("Wie geht es dir", fragenK);
-        actions.Add("Geht es ihnen gut", fragenK);
+        //actions.Add("Geht es ihnen gut", fragenK);
         actions.Add("Geht es dir gut", fragenK);
         actions.Add("Geht es ihnen besser", fragenK);
         actions.Add("Geht es dir besser", fragenK);
@@ -102,7 +105,7 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("Nur eine Person", ambulanceHowManyK);
 
         actions.Add("Ja gerade so", ambulanceBewusstseinK);
-        actions.Add("Ja", ambulanceBewusstseinK);
+        //actions.Add("Ja", ambulanceBewusstseinK);
         actions.Add("So halb", ambulanceBewusstseinK);
         actions.Add("Ich glaube schon", ambulanceBewusstseinK);
         actions.Add("Ich denke schon", ambulanceBewusstseinK);
@@ -190,6 +193,9 @@ public class VoiceRecognition : MonoBehaviour
             dialogueManager.QueueAndPlayDialogueById(8);
             dialogueManager.QueueAndPlayDialogueById(9);
             dialogueManager.QueueAndPlayDialogueById(10);
+
+            objectToSetActive.SetActive(true);
+            Debug.Log("setback drop zone active");
 
         }
     }
