@@ -16,6 +16,7 @@ public class VoiceRecognition : MonoBehaviour
     //KREISLAUF
     public bool kollapsScene = false;
     public int kollapsCounter = 0;
+    public bool nearbyGuy = false;
 
     public GameObject objectToSetActive;
 
@@ -196,6 +197,11 @@ public class VoiceRecognition : MonoBehaviour
 
     //KREISLAUF:
 
+    public void changeNearbyGuy()
+    {
+        nearbyGuy = true;
+    }
+
     public void setKollapsSceneTrue()
     {
         if (kollapsScene == false)
@@ -206,7 +212,7 @@ public class VoiceRecognition : MonoBehaviour
 
     private void ansprechenK()
     {
-        if (testForDialogueManager() && kollapsScene && kollapsCounter == 0)
+        if (testForDialogueManager() && kollapsScene && nearbyGuy && kollapsCounter == 0)
         {
             dialogueManager.QueueAndPlayDialogueById(7);
             dialogueManager.QueueAndPlayDialogueById(8);
