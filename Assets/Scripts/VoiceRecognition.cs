@@ -107,7 +107,7 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("Nur eine Person", ambulanceHowManyK);
 
         actions.Add("Ja gerade so", ambulanceBewusstseinK);
-        //actions.Add("Ja", ambulanceBewusstseinK);
+        actions.Add("Ja", ambulanceBewusstseinK);
         actions.Add("So halb", ambulanceBewusstseinK);
         actions.Add("Ich glaube schon", ambulanceBewusstseinK);
         actions.Add("Ich denke schon", ambulanceBewusstseinK);
@@ -173,7 +173,7 @@ public class VoiceRecognition : MonoBehaviour
         actions.Add("Sprachschwierigkeiten", krankenwagen_symptomeSprachschwierigkeiten); //Anders?
         actions.Add("Probleme beim Sprechen", krankenwagen_symptomeSprachschwierigkeiten);
 
-        actions.Add("Ja", krankenwagen_bestaetigung);
+        actions.Add("Jaa", krankenwagen_bestaetigung);
         actions.Add("verstanden", krankenwagen_bestaetigung);
         actions.Add("Habe ich", krankenwagen_bestaetigung);
         actions.Add("Ich habe verstanden", krankenwagen_bestaetigung);
