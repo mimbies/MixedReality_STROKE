@@ -15,6 +15,7 @@ public class VoiceRecognition : MonoBehaviour
 
     //KREISLAUF
     public bool kollapsScene = false;
+    public int kollapsCounter = 0;
 
     public GameObject objectToSetActive;
 
@@ -132,32 +133,45 @@ public class VoiceRecognition : MonoBehaviour
 
         // SCHLAGANFALL:
         actions.Add("Hallo Jürgen", hallojuergen);
-        actions.Add("Alles okay", emily_allesokay);     // Ist alles Okay?
+
+        actions.Add("Alles okay", emily_allesokay);
+        // Ist alles Okay?
         actions.Add("dein Name", emily_deinname);       // Wie ist dein Name? Oder: Wie heißt du? wollen wir mehr optionen haben?
         actions.Add("ihr Name", emily_deinname);
         actions.Add("wie heißt du", emily_deinname);
+
         actions.Add("aufstehen", emily_aufstehen);      //Kannst du aufstehen?
         actions.Add("Kannst du aufstehen", emily_aufstehen);
         actions.Add("Kannst du lächeln", emily_aufstehen);
         actions.Add("Kannst du aufstehen und lächeln", emily_aufstehen);
+
         actions.Add("Arme ausstrecken", emily_armeausstrecken); //Kannst du deine Arme ausstrecken?
         actions.Add("Kannst du deine Arme ausstrecken", emily_armeausstrecken); //Kannst du deine Arme ausstrecken?
         actions.Add("Arme", emily_armeausstrecken); //Kannst du deine Arme ausstrecken?
+
         actions.Add("linkes Bein", emily_linkesbein);   // Kannst du dich auf dein linkes Bein stellen?
         actions.Add("Kannst du dich auf dein linkes Bein stellen", emily_linkesbein);
         actions.Add("Kannst du dich auf ein Bein stellen", emily_linkesbein);
+
         actions.Add("sonniger Tag", emily_nachsprechen);
         actions.Add("Heute ist Mittwoch, es soll ein sonniger Tag werden", emily_nachsprechen);
+
         actions.Add("Bushaltestelle", krankenwagen_wo); //ungenau?
         actions.Add("Park", krankenwagen_wo);
+
         actions.Add("eine Frau", krankenwagen_wer);
         actions.Add("emily", krankenwagen_wer); // Eine Frau mit dem Namen Emily?
+
         actions.Add("Schlaganfall", krankenwagen_was); //Sie hat vermutlich einen Schlaganfall
+
         actions.Add("gelehmt", krankenwagen_symptomGelaehmt);
+
         actions.Add("balance", krankenwagen_symptomeBalance);
         actions.Add("ballons", krankenwagen_symptomeBalance);
+
         actions.Add("Sprachschwierigkeiten", krankenwagen_symptomeSprachschwierigkeiten); //Anders?
         actions.Add("Probleme beim Sprechen", krankenwagen_symptomeSprachschwierigkeiten);
+
         actions.Add("Ja", krankenwagen_bestaetigung);
         actions.Add("verstanden", krankenwagen_bestaetigung);
         actions.Add("Habe ich", krankenwagen_bestaetigung);
@@ -192,7 +206,7 @@ public class VoiceRecognition : MonoBehaviour
 
     private void ansprechenK()
     {
-        if (testForDialogueManager() && kollapsScene)
+        if (testForDialogueManager() && kollapsScene && kollapsCounter == 0)
         {
             dialogueManager.QueueAndPlayDialogueById(7);
             dialogueManager.QueueAndPlayDialogueById(8);
@@ -201,50 +215,55 @@ public class VoiceRecognition : MonoBehaviour
 
             objectToSetActive.SetActive(true);
             Debug.Log("setback drop zone active");
+            kollapsCounter++;
 
         }
     }
 
     private void fragenK()
     {
-        if (testForDialogueManager() && kollapsScene)
+        if (testForDialogueManager() && kollapsScene && kollapsCounter == 1)
         {
             dialogueManager.QueueAndPlayDialogueById(16);
             dialogueManager.QueueAndPlayDialogueById(17);
+            kollapsCounter++;
 
         }
     }
 
     private void ambulanceWhereK()
     {
-        if (testForDialogueManager() && kollapsScene)
+        if (testForDialogueManager() && kollapsScene && kollapsCounter == 2)
         {
             dialogueManager.QueueAndPlayDialogueById(19);
+            kollapsCounter++;
 
         }
     }
 
     private void ambulanceWhatK()
     {
-        if (testForDialogueManager() && kollapsScene)
+        if (testForDialogueManager() && kollapsScene && kollapsCounter == 3)
         {
             dialogueManager.QueueAndPlayDialogueById(20);
+            kollapsCounter++;
 
         }
     }
 
     private void ambulanceHowManyK()
     {
-        if (testForDialogueManager() && kollapsScene)
+        if (testForDialogueManager() && kollapsScene && kollapsCounter == 4)
         {
             dialogueManager.QueueAndPlayDialogueById(21);
+            kollapsCounter++;
 
         }
     }
 
     private void ambulanceBewusstseinK()
     {
-        if (testForDialogueManager() && kollapsScene)
+        if (testForDialogueManager() && kollapsScene && kollapsCounter == 5)
         {
             dialogueManager.QueueAndPlayDialogueById(22);
             dialogueManager.QueueAndPlayDialogueById(23);
