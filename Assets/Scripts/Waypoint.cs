@@ -2,18 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Waypoint : MonoBehaviour
 {
 
     public Image img;
     public Transform target;
-    public Text meter;
+    public TMP_Text meter;
     public Vector3 offset;
+
+    public Transform newTarget;
+
+    public bool enabledWaypoint = false;
 
 
     void Update()
     {
+
+
         float minX = img.GetPixelAdjustedRect().width / 2;
         float maxX = Screen.width - minX;
 
@@ -38,8 +45,30 @@ public class Waypoint : MonoBehaviour
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
         img.transform.position = pos;
-        meter.text = ((int)Vector3.Distance(target.position, transform.position)).ToString() + "m";
+        meter.text = ((((int)Vector3.Distance(target.position, transform.position))) / 2).ToString() + "m";
 
 
+
+    }
+
+    public void setNewTarget()
+    {
+        this.target = newTarget;
+    }
+
+    public void enableWaypoint()
+    {
+        if (!enabledWaypoint)
+        {
+            enabledWaypoint = true;
+        }
+    }
+
+    public void disableWaypoint()
+    {
+        if (enabledWaypoint)
+        {
+            enabledWaypoint = false;
+        }
     }
 }
